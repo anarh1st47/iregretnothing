@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\sdk">
+      <UniqueIdentifier>{e7d5e163-4082-4833-8dc5-0f660fcd8003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\hooker">
+      <UniqueIdentifier>{cd2d4cda-551c-4865-bf3f-5bdd4a7454c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hooker">
+      <UniqueIdentifier>{6d5b97d3-f620-4ae7-92e9-64181f2a1e06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interfaces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hooker\minhook\hde\hde32.c">
+      <Filter>Source Files\hooker</Filter>
+    </ClCompile>
+    <ClCompile Include="hooker\minhook\hde\hde64.c">
+      <Filter>Source Files\hooker</Filter>
+    </ClCompile>
+    <ClCompile Include="hooker\minhook\buffer.c">
+      <Filter>Source Files\hooker</Filter>
+    </ClCompile>
+    <ClCompile Include="hooker\minhook\hook.c">
+      <Filter>Source Files\hooker</Filter>
+    </ClCompile>
+    <ClCompile Include="hooker\minhook\trampoline.c">
+      <Filter>Source Files\hooker</Filter>
+    </ClCompile>
+    <ClCompile Include="cheat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tarray.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fname.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="uobject.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="hooks.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\hooker.hpp">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\MinHook.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\minhook\buffer.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\minhook\trampoline.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\minhook\hde\hde32.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\minhook\hde\hde64.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\minhook\hde\pstdint.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\minhook\hde\table32.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="hooker\minhook\hde\table64.h">
+      <Filter>Header Files\hooker</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
