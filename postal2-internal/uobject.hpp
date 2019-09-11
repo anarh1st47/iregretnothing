@@ -79,7 +79,8 @@ struct c_inventory {
 struct c_pawn;
 
 struct c_actor {
-	char pad[0x40];
+	char pad[0x3c];
+	float unk_meme;
 	int classid;
 	c_pawn* is_player();
 };
@@ -130,8 +131,10 @@ struct c_level
 {
 	char pad_0000[44]; //0x0000
 	c_actor** actorlist; //0x002C
-	int cnt_ents;
-}; //Size: 0x0044
+	int cnt_ents; //0x30
+	char pad_0030[0xd0 - 0x30 - 8];//0x34
+	double unk_meme;
+}; 
 
 struct c_controller
 {
