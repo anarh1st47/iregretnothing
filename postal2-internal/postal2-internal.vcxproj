@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cheat.hpp" />
+    <ClInclude Include="color.hpp" />
     <ClInclude Include="fname.hpp" />
     <ClInclude Include="hooker\hooker.hpp" />
     <ClInclude Include="hooker\MinHook.h" />

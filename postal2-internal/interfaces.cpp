@@ -8,6 +8,9 @@ void interfaces::initialize() {
 	do {
 		cheat::core_handle = GetModuleHandleA("Core.dll");
 	} while (!cheat::core_handle);
+	do {
+		cheat::engine_handle = GetModuleHandleA("Engine.dll");
+	} while (!cheat::engine_handle);
 	while(!g_objects)
 		g_objects = (TArray< u_object* >*) GetProcAddress(cheat::core_handle, "?GObjObjects@UObject@@0V?$TArray@PAVUObject@@@@A");
 	while (!g_names)

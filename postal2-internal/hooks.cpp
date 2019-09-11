@@ -7,14 +7,11 @@
 #include "math.hpp"
 #include "utils.hpp"
 #include "memhacks.hpp"
-
-
-using c_color = int;
+#include "color.hpp"
 
 
 void draw_line(float x1, float y1, float x2, float y2) {
-	static auto engine_handle = GetModuleHandleA("Engine.dll");
-	static auto draw_line = (void(__thiscall*)(void*, float, float, float, float, c_color))GetProcAddress(engine_handle, "?DrawLine@FCanvasUtil@@QAEXMMMMVFColor@@@Z");
+	static auto draw_line = (void(__thiscall*)(void*, float, float, float, float, c_color))GetProcAddress(cheat::engine_handle, "?DrawLine@FCanvasUtil@@QAEXMMMMVFColor@@@Z");
 	draw_line(cheat::canvas->util, x1, y1, x2, y2, 0xff00ffff);
 }
 
@@ -78,33 +75,13 @@ void __fastcall hooks::master_process_post_render_h(uinteractionmaster* ecx, voi
 }
 
 
-
-void __fastcall hooks::event_player_calc_view_h(void* ecx, void* edx, c_pawn** a2, vec_3d& cam_location, vec_3d_int& cam_rotation) {
-	static auto ofunc = h.original(&event_player_calc_view_h);
-	ofunc(ecx, edx, a2, cam_location, cam_rotation);
-	cheat::camera::pos = cam_location;
-	//cheat::camera::rot = vec_3d{ (float)cam_rotation.x, (float)cam_rotation.y, (float)cam_rotation.z };
-}
-
-
 void hooks::initialize() {
-	auto core_handle = GetModuleHandleA("Engine.dll");
-	while (!core_handle)
-		core_handle = GetModuleHandleA("Engine.dll");
-
-	auto master_process_tick_addr = GetProcAddress(core_handle, "?MasterProcessTick@UInteractionMaster@@QAEXM@Z");
+	auto master_process_tick_addr = GetProcAddress(cheat::engine_handle, "?MasterProcessTick@UInteractionMaster@@QAEXM@Z");
 	h.create_hook(master_process_tick_h, master_process_tick_addr);
 
-
-	auto master_process_pre_render_addr = GetProcAddress(core_handle, "?MasterProcessPreRender@UInteractionMaster@@QAEXPAVUCanvas@@@Z");
+	auto master_process_pre_render_addr = GetProcAddress(cheat::engine_handle, "?MasterProcessPreRender@UInteractionMaster@@QAEXPAVUCanvas@@@Z");
 	h.create_hook(master_process_pre_render_h, master_process_pre_render_addr);
 
-	auto master_process_post_render_addr = GetProcAddress(core_handle, "?MasterProcessPostRender@UInteractionMaster@@QAEXPAVUCanvas@@@Z");
-	h.create_hook(master_process_post_render_h, master_process_post_render_addr);
-
-
-	//auto event_player_calc_view = GetProcAddress(core_handle, "?eventPlayerCalcView@APlayerController@@QAEXAAPAVAActor@@AAVFVector@@AAVFRotator@@@Z");
-	//h.create_hook(event_player_calc_view_h, event_player_calc_view);
-
+	
 	h.enable();
 };
