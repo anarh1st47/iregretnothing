@@ -16,19 +16,24 @@ namespace cheat {
 			if (!meme2)
 				continue;
 			auto name2 = meme2->WideName;
-			fout << name2 << std::endl;
+			fout << std::hex << meme2->Header.unk0 << " "<< meme2->Header.unk1 << meme2->Header.unk2 << name2 << std::endl;
 		}
 		fout.close();
 		//dont work
-		std::ofstream fout2("names_dump2.txt");
-		for (auto i = 0; i < interfaces::g_objects->size; i++) {
-			auto meme2 = interfaces::g_objects->at(i);
-			if (!meme2)
-				continue;
-			auto name2 = meme2->Name;
-			fout << name2 << std::endl;
-		}
-		fout2.close();
+		//std::ofstream fout2("names_dump2.txt");
+		//for (auto i = 0; i < interfaces::g_objects->size; i++) {
+		//	auto meme2 = interfaces::g_objects->at(i);
+		//	if (!meme2)
+		//		continue;
+		//	if (meme2->class_id >= 0x33f1 && meme2->class_id < 0x341b) {
+		//		auto player = (c_pawn*)meme2;
+		//		auto name = player->name;
+		//		_asm nop;
+		//	}
+		//	//auto name2 = meme2->class_id;
+		//	//fout << name2 << std::endl;
+		//}
+		//fout2.close();
 		//_asm nop
 		return EXIT_SUCCESS;
 	};

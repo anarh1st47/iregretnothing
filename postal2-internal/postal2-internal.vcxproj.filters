@@ -22,6 +22,9 @@
     <Filter Include="Source Files\hooker">
       <UniqueIdentifier>{6d5b97d3-f620-4ae7-92e9-64181f2a1e06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\sdk">
+      <UniqueIdentifier>{9967c865-d767-4763-9542-da5bec01de42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -49,6 +52,15 @@
       <Filter>Source Files\hooker</Filter>
     </ClCompile>
     <ClCompile Include="cheat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="structs.cpp">
+      <Filter>Source Files\sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

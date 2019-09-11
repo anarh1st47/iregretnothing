@@ -2,10 +2,11 @@
 #include <Windows.h>
 #include "tarray.hpp"
 struct FNameEntry;
-class UObject;
+class u_object;
+struct c_pawn;
 
 namespace interfaces {
-	inline TArray< UObject* >* g_objects = nullptr;
+	inline TArray< u_object* >* g_objects = nullptr;
 	inline TArray< FNameEntry* >* g_names = nullptr;
 	void initialize();
 };
