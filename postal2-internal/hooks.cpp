@@ -6,6 +6,7 @@
 #include "interfaces.hpp"
 #include "math.hpp"
 #include "utils.hpp"
+#include "memhacks.hpp"
 
 
 using c_color = int;
@@ -29,38 +30,35 @@ void __fastcall hooks::master_process_tick_h(uinteractionmaster* ecx, void* edx,
 	static auto ofunc = h.original(&master_process_tick_h);
 	if (cheat::canvas) {
 		auto viewport = cheat::canvas->viewport;
-		auto localplayer = viewport->controller->pawn;
-		auto level = viewport->controller->level;
+		if(!viewport)
+			return ofunc(ecx, edx, delta);
+		auto controller = viewport->controller;
+		if (!controller)
+			return;
+		cheat::localplayer = controller->pawn;
+		auto level = controller->level;
 
 
-		if (localplayer) {
+		if (cheat::localplayer) {
 			utils::get_camera();
-			auto weapon = *(uintptr_t*)((*(uintptr_t*)& localplayer->inv->weap[0].ammo) + 0xa0);
 			for (auto i = 0; i < level->cnt_ents; i++) {
 				auto actorlist = level->actorlist;
-				auto ent = actorlist[i];
+				auto &ent = actorlist[i];
 				if (!ent)
 					continue;
-				if (level->unk_meme - actorlist[i]->unk_meme >= 0.1)
+				if (level->unk_meme - ent->unk_meme >= 0.1)
 					continue;
-				if (auto player = actorlist[i]->is_player(); !player || *(int*)player <= 0)
+				if (auto player = ent->is_player(); !player || *(int*)player <= 0)
 					continue;
 				else {
 					auto screen_pos = math::world_to_screen(player->pos);
 					draw_box(screen_pos.x - 100, screen_pos.y - 100, screen_pos.x + 100, screen_pos.y + 100);
 				}
 			}
+			 
+			hacks::memhacks::godmode();
 
-			localplayer->health = 1337 * 3;
-
-			auto weaps = localplayer->inv;
-			for (auto i = 0; i < 10; i++) {
-				auto weap = weaps->weap[i];
-				if (!weap.ammo || !weap.ammo2)
-					break;
-
-				weap.ammo->bullets = 0x100;
-			}
+			hacks::memhacks::inf_ammo();
 		}
 	}
 	return ofunc(ecx, edx, delta);
@@ -76,10 +74,6 @@ void __fastcall hooks::master_process_post_render_h(uinteractionmaster* ecx, voi
 	static auto ofunc = h.original(&master_process_post_render_h);
 	//cheat::canvas = canvas;
 	ofunc(ecx, edx, canvas);
-
-	/*static auto engine_handle = GetModuleHandleA("Engine.dll");
-	static auto draw_line = (void(__thiscall*)(void*, float, float, float, float, c_color))GetProcAddress(engine_handle, "?DrawLine@FCanvasUtil@@QAEXMMMMVFColor@@@Z");
-	draw_line(cheat::canvas->util, 100, 100, 100, 500.f, 0xff00ffff);*/
 
 }
 

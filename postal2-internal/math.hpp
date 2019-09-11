@@ -33,16 +33,18 @@ struct vec_3d {
 		return (x * v.x + y * v.y + z * v.z);
 	}
 	vec_3d(const vec_3d_int& v) {
-		x = v.x;
-		y = v.y;
-		z = v.z;
+		x = static_cast<float>(v.x);
+		y = static_cast<float>(v.y);
+		z = static_cast<float>(v.z);
 	};
 	vec_3d(float _x, float _y, float _z) {
 		x = _x;
 		y = _y;
 		z = _z;
 	};
-	vec_3d(){};
+	vec_3d(){
+		x = y = z = 0.f;
+	};
 };
 
 namespace math {

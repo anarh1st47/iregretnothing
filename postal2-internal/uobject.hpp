@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <Windows.h>
 #include "math.hpp"
+#include "cheat.hpp"
 
 using FPointer = uintptr_t;
 using FQWord = uint64_t;
@@ -125,6 +126,9 @@ struct c_pawn
 	char pad_0A14[8]; //0x0A14
 	wchar_t* N00000CDB; //0x0A1C
 	char pad_0A20[1596]; //0x0A20
+	void set_health(int val) {
+		health = val * 3;
+	}
 }; //Size: 0x105C
 
 struct c_level
@@ -145,13 +149,11 @@ struct c_controller
 	char pad_026C[3544]; //0x026C
 
 	void* find_function(FName name, int unk) {
-		auto core_handle = GetModuleHandleA("Core.dll");
-		auto func = (void*(__thiscall*)(c_controller*, FName, int))GetProcAddress(core_handle, "?FindFunction@UObject@@QAEPAVUFunction@@VFName@@H@Z");
+		auto func = (void*(__thiscall*)(c_controller*, FName, int))GetProcAddress(cheat::core_handle, "?FindFunction@UObject@@QAEPAVUFunction@@VFName@@H@Z");
 		return func(this, name, unk);
 	}
 	void* process_event(void* _func, APlayerController_eventPlayerCalcView_Parms*params, int unk) {
-		auto core_handle = GetModuleHandleA("Core.dll");
-		auto func = (void* (__thiscall*)(c_controller*, void*, APlayerController_eventPlayerCalcView_Parms*, int))GetProcAddress(core_handle, "?ProcessEvent@UObject@@UAEXPAVUFunction@@PAX1@Z");
+		auto func = (void* (__thiscall*)(c_controller*, void*, APlayerController_eventPlayerCalcView_Parms*, int))GetProcAddress(cheat::core_handle, "?ProcessEvent@UObject@@UAEXPAVUFunction@@PAX1@Z");
 		return func(this, _func, params, unk);
 	}
 }; //Size: 0x1044
@@ -207,13 +209,11 @@ struct c_canvas //: public UObject
 	struct c_canvas_util* util; // 84h
 
 	void* find_function(FName name, int unk) {
-		auto core_handle = GetModuleHandleA("Core.dll");
-		auto func = (void* (__thiscall*)(c_canvas*, FName, int))GetProcAddress(core_handle, "?FindFunction@UObject@@QAEPAVUFunction@@VFName@@H@Z");
+		auto func = (void* (__thiscall*)(c_canvas*, FName, int))GetProcAddress(cheat::core_handle, "?FindFunction@UObject@@QAEPAVUFunction@@VFName@@H@Z");
 		return func(this, name, unk);
 	}
 	void* process_event(void* _func, void* params, int unk) {
-		auto core_handle = GetModuleHandleA("Core.dll");
-		auto func = (void* (__thiscall*)(c_canvas*, void*, void*, int))GetProcAddress(core_handle, "?ProcessEvent@UObject@@UAEXPAVUFunction@@PAX1@Z");
+		auto func = (void* (__thiscall*)(c_canvas*, void*, void*, int))GetProcAddress(cheat::core_handle, "?ProcessEvent@UObject@@UAEXPAVUFunction@@PAX1@Z");
 		return func(this, _func, params, unk);
 	}
 	//void* pCanvasUtil;

@@ -170,6 +170,7 @@
     <ClCompile Include="hooks.cpp" />
     <ClCompile Include="interfaces.cpp" />
     <ClCompile Include="math.cpp" />
+    <ClCompile Include="memhacks.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="hooks.hpp" />
     <ClInclude Include="interfaces.hpp" />
     <ClInclude Include="math.hpp" />
+    <ClInclude Include="memhacks.hpp" />
     <ClInclude Include="tarray.hpp" />
     <ClInclude Include="uobject.hpp" />
     <ClInclude Include="utils.hpp" />

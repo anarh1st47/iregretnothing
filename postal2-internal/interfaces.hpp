@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include "tarray.hpp"
 struct FNameEntry;
-class u_object;
+struct u_object;
 struct c_pawn;
 
 namespace interfaces {

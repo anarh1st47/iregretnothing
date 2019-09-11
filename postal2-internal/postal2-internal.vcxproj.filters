@@ -25,6 +25,12 @@
     <Filter Include="Source Files\sdk">
       <UniqueIdentifier>{9967c865-d767-4763-9542-da5bec01de42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\hacks">
+      <UniqueIdentifier>{39957623-49a2-4fd7-bbbc-aecf9f78755b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\hacks">
+      <UniqueIdentifier>{05966b05-cc04-4eff-86bc-9ed2ebc25ba5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -62,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="math.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memhacks.cpp">
+      <Filter>Source Files\hacks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="utils.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memhacks.hpp">
+      <Filter>Header Files\hacks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
