@@ -10,11 +10,17 @@
 #include "color.hpp"
 #include "inputsys.hpp"
 
+#include <d3dcompiler.h>
+#include <dxgi.h>
+#include <Include/D3D8Types.h>
+#include <Include/d3d8.h>
+
+//#define SAFE_RELEASE(x) if (x) { x->Release(); x = NULL; }
+#define D3D_SDK_VERSION 220
+
 bool is_screen_pos(const vec_3d& pos) {
 	return cheat::canvas && cheat::canvas->clip_x > pos.x && pos.x > 0.f  && cheat::canvas->clip_y > pos.y && pos.y > 0.f;
 }
-
-
 
 void draw_box(float x1, float y1, float x2, float y2, c_color color) {
 	cheat::canvas->util->draw_line(x1, y1, x1, y2, color);
@@ -93,6 +99,15 @@ void __fastcall hooks::master_process_pre_render_h(uinteractionmaster* ecx, void
 	ofunc(ecx, edx, canvas);
 }
 
+
+BOOL WINAPI hooks::set_cursor_h(int x, int y) {
+	static auto ofunc = h.original(set_cursor_h);
+
+	//if (menu::IsVisible())
+	//	return true;
+	return ofunc(x, y);
+}
+
 void hooks::initialize() {
 	auto master_process_tick_addr = GetProcAddress(cheat::engine_handle, "?MasterProcessTick@UInteractionMaster@@QAEXM@Z");
 	h.create_hook(master_process_tick_h, master_process_tick_addr);
@@ -100,9 +115,107 @@ void hooks::initialize() {
 	auto master_process_pre_render_addr = GetProcAddress(cheat::engine_handle, "?MasterProcessPreRender@UInteractionMaster@@QAEXPAVUCanvas@@@Z");
 	h.create_hook(master_process_pre_render_h, master_process_pre_render_addr);
 
+	h.create_hook(set_cursor_h, SetCursorPos);
+
+	dx::initialize();
+
 	h.enable();
 };
 
+
+struct IDXGISwapChain;
+bool isResizing = false;
+
+
+
+int __stdcall hooks::present_h(IDirect3DDevice8* device,
+	CONST RECT* src_rect,
+	CONST RECT* dst_rect,
+	HWND override_window,
+	CONST RGNDATA* dirty_region)
+{
+	static auto present_inited = false;
+	static auto ofunc = h.original(present_h);
+
+	if (isResizing)
+		return ofunc(device, src_rect, dst_rect, override_window, dirty_region);
+
+	return ofunc(device, src_rect, dst_rect, override_window, dirty_region);
+}
+
+int __stdcall hooks::reset_h(IDirect3DDevice8* device, D3DPRESENT_PARAMETERS* pPresentationParameters)
+{
+	isResizing = true;
+	static auto ofunc = h.original(reset_h);
+
+
+	//ImGui_ImplDX11_InvalidateDeviceObjects();
+
+	//SAFE_RELEASE(RenderTargetView);
+	//SAFE_RELEASE(oldRenderTargetView);
+
+	auto hr = ofunc(device, pPresentationParameters);
+
+
+	//ImGui_ImplDX11_CreateDeviceObjects();
+
+	isResizing = false;
+	return hr;
+}
+
+LRESULT CALLBACK DXGIMsgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) { return DefWindowProc(hwnd, uMsg, wParam, lParam); }
+
+void hooks::dx::initialize() {
+	auto mod = GetModuleHandleA("d3d8.dll");
+	HRESULT hr;
+	WNDCLASSEXA wc = { sizeof(WNDCLASSEX), CS_CLASSDC, DXGIMsgProc, 0L, 0L, GetModuleHandleA(NULL), NULL, NULL, NULL, NULL, "DX", NULL };
+	RegisterClassExA(&wc);
+	HWND hwnd = CreateWindowA("DX", "cheat", WS_OVERLAPPEDWINDOW, 100, 100, 300, 300, NULL, NULL, wc.hInstance, NULL);
+	if (!hwnd) {
+		return;
+	}
+
+	if (!mod) {
+		return;
+	}
+
+	auto create = (IDirect3D8 * (__stdcall*)(uintptr_t)) GetProcAddress(mod, "Direct3DCreate8");
+	if (!create) {
+		return;
+	}
+
+	auto d3d8 = create(D3D_SDK_VERSION);
+	if (!d3d8) {
+		return;
+	}
+
+	D3DPRESENT_PARAMETERS pp = {};
+	pp.Windowed = true;
+	pp.SwapEffect = D3DSWAPEFFECT_FLIP;
+	pp.BackBufferFormat = D3DFMT_A8R8G8B8;
+	pp.BackBufferWidth = 2;
+	pp.BackBufferHeight = 2;
+	pp.BackBufferCount = 1;
+	pp.hDeviceWindow = hwnd;
+	IDirect3DDevice8* device;
+
+	hr = d3d8->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
+		hwnd,
+		D3DCREATE_HARDWARE_VERTEXPROCESSING, &pp,
+		&device);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	auto vtable = *(void**)device;
+	auto present_addr = (void*)(((int*)vtable)[15]);
+	hooks::h.create_hook(hooks::present_h, present_addr);
+
+	auto reset_addr = (void*)(((int*)vtable)[14]);
+	hooks::h.create_hook(hooks::present_h, reset_addr);
+}
+
+
 void hooks::destroy() {
 	h.restore();
-}
+} 

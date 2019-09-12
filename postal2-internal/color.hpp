@@ -1,9 +1,9 @@
 #pragma once
-#include <cstddef>
+#include <cstdint>
+struct ImVec4;
 
 struct c_color {
-	std::byte r, g, b, a;
-	c_color(int v) {
-		std::memcpy(this, (void*)&v, 4);
-	}
+	uint8_t r, g, b, a;
+	c_color(int v);
+	void from_imvec4(ImVec4 v);
 };

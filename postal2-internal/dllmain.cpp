@@ -1,10 +1,4 @@
 #include <Windows.h>
-#include <thread>
-#include <fstream>
-#include "interfaces.hpp"
-#include "fname.hpp"
-#include "uobject.hpp"
-#include "hooks.hpp"
 #include "cheat.hpp"
 
 
@@ -23,7 +17,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     case DLL_THREAD_DETACH:
 		break;
     case DLL_PROCESS_DETACH:
-		hooks::destroy();
+		cheat::unload();
         break;
     }
     return TRUE;

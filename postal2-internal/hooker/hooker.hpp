@@ -36,13 +36,16 @@ namespace hooks {
 		}
 
 		template < typename fn = uintptr_t >
-		void create_hook(fn custom_func, void* o_func) {
+		bool create_hook(fn custom_func, void* o_func) {
 
 			hook_t hook = {};
 			hook.target = o_func;
 			hook.custom = custom_func;
-			MH_CreateHook(o_func, custom_func, &hook.original);
-			m_hooks.push_back(hook);
+			if (MH_CreateHook(o_func, custom_func, &hook.original) == MH_OK) {
+				m_hooks.push_back(hook);
+				return true;
+			}
+			return false;
 		}
 
 		void enable() {

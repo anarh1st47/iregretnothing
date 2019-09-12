@@ -31,6 +31,21 @@
     <Filter Include="Header Files\hacks">
       <UniqueIdentifier>{05966b05-cc04-4eff-86bc-9ed2ebc25ba5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\menu">
+      <UniqueIdentifier>{b04e2642-4011-4545-84f7-c660b5ce99a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\menu\imgui">
+      <UniqueIdentifier>{ef67d50c-cd16-4959-813f-b4d22aaaa3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\menu\imgui\impl">
+      <UniqueIdentifier>{a5e8d6fb-96ee-4557-9a8d-317cc043e324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\menu">
+      <UniqueIdentifier>{7ad8a64b-65af-4e57-ba5c-3d7f1cf8311a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\menu\imgui">
+      <UniqueIdentifier>{ac4849b9-b6e6-4730-a103-73c4539c266f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -74,6 +89,24 @@
     </ClCompile>
     <ClCompile Include="inputsys.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Source Files\menu\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Source Files\menu\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>Source Files\menu\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files\menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +169,33 @@
     </ClInclude>
     <ClInclude Include="inputsys.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Header Files\menu\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Header Files\menu\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Header Files\menu\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>Header Files\menu\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>Header Files\menu\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>Header Files\menu\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.hpp">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="ui.hpp">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\directx11\imgui_impl_dx11.h">
+      <Filter>Header Files\menu\imgui\impl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
