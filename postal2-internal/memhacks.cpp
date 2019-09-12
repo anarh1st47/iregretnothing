@@ -11,7 +11,7 @@ void hacks::memhacks::godmode() {
 
 void hacks::memhacks::inf_ammo() {
 	auto &weaps = cheat::localplayer->inv;
-	for (auto i = 0; i < 15; i++) {
+	for (auto i = 0; i < 10; i++) {
 		auto weap = weaps->weap[i];
 		if (!weap.ammo || !weap.ammo2)
 			break;

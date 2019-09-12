@@ -1,8 +1,10 @@
 #pragma once
 #include <cstdint>
 #include <Windows.h>
+#include <functional>
 #include "math.hpp"
 #include "cheat.hpp"
+#include "color.hpp"
 
 using FPointer = uintptr_t;
 using FQWord = uint64_t;
@@ -84,6 +86,10 @@ struct c_actor {
 	float unk_meme;
 	int classid;
 	c_pawn* is_player();
+	//?execGetBoneCoords@AActor@@QAEXAAUFFrame@@QAX@Z
+	void __thiscall execGetBoneCoords(struct FFrame* a2) {
+
+	}
 };
 
 struct c_pawn
@@ -92,7 +98,9 @@ struct c_pawn
 	vec_3d pos; //0x00E8
 	char pad_00F4[52]; //0x00F4
 	vec_3d pos2; //0x0128
-	char pad_0134[216]; //0x0134
+	char pad_0134[160]; //0x0134
+	float height; //0x01D4
+	char pad_01D8[52]; //0x01D8
 	vec_3d pos3; //0x020C
 	char pad_0218[0x50]; //0x0218 
 	c_pawn* next; // 268 next
@@ -138,6 +146,19 @@ struct c_level
 	int cnt_ents; //0x30
 	char pad_0030[0xd0 - 0x30 - 8];//0x34
 	double unk_meme;
+	void for_each_player(std::function<void(c_pawn*)> f) {
+		for (auto i = 0; i < cnt_ents; i++) {
+			auto& ent = actorlist[i];
+			if (!ent)
+				continue;
+			if (unk_meme - ent->unk_meme >= 0.1)
+				continue;
+			auto player = ent->is_player();
+			if ( !player || *(int*)player <= 0)
+				continue;
+			f(player);
+		}
+	}
 }; 
 
 struct c_controller
@@ -170,43 +191,28 @@ struct c_viewport {
 	void* actor2;*/
 };
 
+struct c_font;
+
+
+struct c_canvas_util {
+	void draw_line(float x1, float y1, float x2, float y2, c_color color = 0xff00ffff);
+	void draw_text(float x1, float y1, wchar_t* text, c_color color = 0xff00ffff);
+};
+
 struct c_canvas //: public UObject
 { //44 48
-	char _pad1[0x44];
+	char pad_0000[40]; //0x0000
+	c_font* font; //0x0028
+	char pad_002C[24]; //0x002C
 	float clip_x; // 44h
 	float clip_y; // 48h
-	char _pad2[0x34];
-	/*class UFont* Font;
-	FLOAT FontScaleX;
-	FLOAT FontScaleY;
-	FLOAT SpaceX;
-	FLOAT SpaceY;
-	FLOAT OrgX;
-	FLOAT OrgY;
-	FLOAT ClipX;
-	FLOAT ClipY;
-	FLOAT CurX;
-	FLOAT CurY;
-	FLOAT Z;
-	BYTE Style;
-	FLOAT CurYL;
-	INT DrawColor;
-	INT bCenter : 1;
-	INT bNoSmooth : 1;
-	INT SizeX;
-	INT SizeY;
-	int ColorModulate[4];
-	INT bForceAlpha : 1;
-	FLOAT ForcedAlpha;
-	INT bRenderLevel : 1;
-	UFont* TinyFont;
-	UFont* SmallFont;
-	UFont* MedFont;
-	uint64_t TinyFontName;
-	uint64_t SmallFontName;
-	uint64_t MedFontName;*/
+	char _pad2[0x24];
+	c_font* font1;
+	c_font* font2;
+	c_font* font3;
+	c_font* font4;
 	c_viewport* viewport; // 80h
-	struct c_canvas_util* util; // 84h
+	c_canvas_util* util; // 84h
 
 	void* find_function(FName name, int unk) {
 		auto func = (void* (__thiscall*)(c_canvas*, FName, int))GetProcAddress(cheat::core_handle, "?FindFunction@UObject@@QAEPAVUFunction@@VFName@@H@Z");
