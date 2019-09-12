@@ -8,6 +8,7 @@ struct c_pawn;
 
 namespace cheat {
 	DWORD WINAPI initialize(void*);
+	void unload();
 	inline c_canvas* canvas = nullptr;
 	inline HMODULE core_handle;
 	inline HMODULE engine_handle;

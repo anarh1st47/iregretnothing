@@ -21,7 +21,9 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	}
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
+		break;
     case DLL_PROCESS_DETACH:
+		hooks::destroy();
         break;
     }
     return TRUE;

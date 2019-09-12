@@ -8,7 +8,7 @@
 #include "utils.hpp"
 #include "memhacks.hpp"
 #include "color.hpp"
-
+#include "inputsys.hpp"
 
 bool is_screen_pos(const vec_3d& pos) {
 	return cheat::canvas && cheat::canvas->clip_x > pos.x && pos.x > 0.f  && cheat::canvas->clip_y > pos.y && pos.y > 0.f;
@@ -51,7 +51,8 @@ void draw_player_esp(c_pawn* player)
 	bot = pos_bot_2d.y;
 
 	draw_box(left, top, right, bot, color);
-	//cheat::canvas->util->draw_text(bot, left, player->name2);
+
+	cheat::canvas->util->draw_text(bot, left, player->name2);
 }
 
 void __fastcall hooks::master_process_tick_h(uinteractionmaster* ecx, void* edx, float delta) {
@@ -99,6 +100,9 @@ void hooks::initialize() {
 	auto master_process_pre_render_addr = GetProcAddress(cheat::engine_handle, "?MasterProcessPreRender@UInteractionMaster@@QAEXPAVUCanvas@@@Z");
 	h.create_hook(master_process_pre_render_h, master_process_pre_render_addr);
 
-	
 	h.enable();
 };
+
+void hooks::destroy() {
+	h.restore();
+}

@@ -72,6 +72,9 @@
     <ClCompile Include="memhacks.cpp">
       <Filter>Source Files\hacks</Filter>
     </ClCompile>
+    <ClCompile Include="inputsys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tarray.hpp">
@@ -129,6 +132,9 @@
       <Filter>Header Files\hacks</Filter>
     </ClInclude>
     <ClInclude Include="color.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inputsys.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

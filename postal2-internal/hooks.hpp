@@ -12,4 +12,5 @@ namespace hooks {
 	void __fastcall master_process_post_render_h(uinteractionmaster* ecx, void* edx, c_canvas* canvas);
 	void __fastcall event_player_calc_view_h(void* ecx, void* edx, c_pawn** a2, vec_3d& cam_location, vec_3d_int& cam_rotation);
 	void initialize();
+	void destroy();
 };

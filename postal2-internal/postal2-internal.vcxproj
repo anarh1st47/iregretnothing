@@ -168,6 +168,7 @@
     <ClCompile Include="hooker\minhook\hook.c" />
     <ClCompile Include="hooker\minhook\trampoline.c" />
     <ClCompile Include="hooks.cpp" />
+    <ClCompile Include="inputsys.cpp" />
     <ClCompile Include="interfaces.cpp" />
     <ClCompile Include="math.cpp" />
     <ClCompile Include="memhacks.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="hooker\minhook\hde\table64.h" />
     <ClInclude Include="hooker\minhook\trampoline.h" />
     <ClInclude Include="hooks.hpp" />
+    <ClInclude Include="inputsys.hpp" />
     <ClInclude Include="interfaces.hpp" />
     <ClInclude Include="math.hpp" />
     <ClInclude Include="memhacks.hpp" />

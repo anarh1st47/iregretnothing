@@ -13,7 +13,8 @@ void c_canvas_util::draw_line(float x1, float y1, float x2, float y2, c_color co
 	static auto draw_line = (void(__thiscall*)(void*, float, float, float, float, c_color))GetProcAddress(cheat::engine_handle, "?DrawLine@FCanvasUtil@@QAEXMMMMVFColor@@@Z");
 	draw_line(this, x1, y1, x2, y2, color);
 }
-void c_canvas_util::draw_text(float x1, float y1, wchar_t* text, c_color color) {
+void c_canvas_util::draw_text(float x, float y, wchar_t* text, c_color color) {
 	static auto draw_text = (void(__thiscall*)(void*, float, float, wchar_t*, c_font*, c_color))GetProcAddress(cheat::engine_handle, "?DrawString@FCanvasUtil@@QAEHHHPB_WPAVUFont@@VFColor@@@Z");
-	draw_text(this, x1, y1, text, cheat::canvas->font, color);
+	draw_text(this, x + .7f, y + .7f, text, cheat::canvas->font, 0xff0000ff);
+	draw_text(this, x, y, text, cheat::canvas->font, color);
 }
