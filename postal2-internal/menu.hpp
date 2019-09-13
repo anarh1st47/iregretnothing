@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include "imgui/imgui.h"
 
 struct IDirect3DDevice9;

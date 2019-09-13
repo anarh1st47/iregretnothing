@@ -1,7 +1,9 @@
 #include "math.hpp"
-#include "uobject.hpp"
 #include "cheat.hpp"
 
+#include "sdk/params.hpp"
+#include "sdk/fname.hpp"
+#include "sdk/c_canvas.hpp"
 
 vec_3d math::world_to_screen(vec_3d pos)
 {

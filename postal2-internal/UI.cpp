@@ -3,6 +3,7 @@
 #include <deque>
 #include <algorithm>
 #include <vector>
+#include <Windows.h>
 
 //template <class T>
 //bool ComboForSkins(const char* label, std::vector current_item, bool(*items_getter)(void* data, int idx, const char** out_text), void* data, int items_count, int popup_max_height_in_items = -1) {

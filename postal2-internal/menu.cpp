@@ -14,7 +14,7 @@
 #include "imgui/imgui_internal.h"
 #include "imgui/directx8/imgui_impl_dx8.h"
 #include "inputsys.hpp"
-#include "hooks.hpp"
+#include "interfaces.hpp"
 
 
 // =========================================================
@@ -137,7 +137,7 @@ void menu::initialize()
 	//ImGui::GetIO().Fonts->AddFontDefault();
 	ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 13);
 	ImGui::GetIO().Fonts->Build();
-	ImGui_ImplDX8_Init(input_sys::get_main_window(), hooks::dx::device);
+	ImGui_ImplDX8_Init(input_sys::get_main_window(), interfaces::dx_device);
 	create_style();
 	ImGui_ImplDX8_CreateDeviceObjects();
 

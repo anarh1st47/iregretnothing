@@ -175,6 +175,8 @@
     <ClCompile Include="cheat.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="hacks\esp.cpp" />
+    <ClCompile Include="hacks\memhacks.cpp" />
     <ClCompile Include="hooker\minhook\buffer.c" />
     <ClCompile Include="hooker\minhook\hde\hde32.c" />
     <ClCompile Include="hooker\minhook\hde\hde64.c" />
@@ -188,7 +190,6 @@
     <ClCompile Include="inputsys.cpp" />
     <ClCompile Include="interfaces.cpp" />
     <ClCompile Include="math.cpp" />
-    <ClCompile Include="memhacks.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -197,7 +198,8 @@
   <ItemGroup>
     <ClInclude Include="cheat.hpp" />
     <ClInclude Include="color.hpp" />
-    <ClInclude Include="fname.hpp" />
+    <ClInclude Include="hacks\esp.hpp" />
+    <ClInclude Include="hacks\memhacks.hpp" />
     <ClInclude Include="hooker\hooker.hpp" />
     <ClInclude Include="hooker\MinHook.h" />
     <ClInclude Include="hooker\minhook\buffer.h" />
@@ -218,11 +220,23 @@
     <ClInclude Include="inputsys.hpp" />
     <ClInclude Include="interfaces.hpp" />
     <ClInclude Include="math.hpp" />
-    <ClInclude Include="memhacks.hpp" />
     <ClInclude Include="menu.hpp" />
-    <ClInclude Include="tarray.hpp" />
+    <ClInclude Include="sdk\c_actor.hpp" />
+    <ClInclude Include="sdk\c_ammo.hpp" />
+    <ClInclude Include="sdk\c_canvas.hpp" />
+    <ClInclude Include="sdk\c_canvas_util.hpp" />
+    <ClInclude Include="sdk\c_controller.hpp" />
+    <ClInclude Include="sdk\c_inventory.hpp" />
+    <ClInclude Include="sdk\c_level.hpp" />
+    <ClInclude Include="sdk\c_pawn.hpp" />
+    <ClInclude Include="sdk\c_viewport.hpp" />
+    <ClInclude Include="sdk\c_weapon.hpp" />
+    <ClInclude Include="sdk\fname.hpp" />
+    <ClInclude Include="sdk\params.hpp" />
+    <ClInclude Include="sdk\tarray.hpp" />
+    <ClInclude Include="sdk\uobject.hpp" />
+    <ClInclude Include="structs.hpp" />
     <ClInclude Include="ui.hpp" />
-    <ClInclude Include="uobject.hpp" />
     <ClInclude Include="utils.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

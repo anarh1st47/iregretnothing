@@ -84,9 +84,6 @@
     <ClCompile Include="math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="memhacks.cpp">
-      <Filter>Source Files\hacks</Filter>
-    </ClCompile>
     <ClCompile Include="inputsys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,19 +108,16 @@
     <ClCompile Include="imgui\directx8\imgui_impl_dx8.cpp">
       <Filter>Source Files\menu\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="hacks\memhacks.cpp">
+      <Filter>Source Files\hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\esp.cpp">
+      <Filter>Source Files\hacks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="tarray.hpp">
-      <Filter>Header Files\sdk</Filter>
-    </ClInclude>
     <ClInclude Include="interfaces.hpp">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="fname.hpp">
-      <Filter>Header Files\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="uobject.hpp">
-      <Filter>Header Files\sdk</Filter>
     </ClInclude>
     <ClInclude Include="hooks.hpp">
       <Filter>Header Files</Filter>
@@ -164,9 +158,6 @@
     <ClInclude Include="utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="memhacks.hpp">
-      <Filter>Header Files\hacks</Filter>
-    </ClInclude>
     <ClInclude Include="color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -199,6 +190,57 @@
     </ClInclude>
     <ClInclude Include="imgui\directx8\imgui_impl_dx8.h">
       <Filter>Header Files\menu\imgui\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_actor.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_ammo.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_canvas.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_canvas_util.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_controller.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_inventory.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_level.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_pawn.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_viewport.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\c_weapon.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\params.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\fname.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\uobject.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\tarray.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\memhacks.hpp">
+      <Filter>Header Files\hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\esp.hpp">
+      <Filter>Header Files\hacks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

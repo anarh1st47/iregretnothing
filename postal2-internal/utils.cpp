@@ -1,10 +1,14 @@
 #include "utils.hpp"
-#include "uobject.hpp"
 #include "cheat.hpp"
 #include "math.hpp"
 
-void utils::get_camera()
-{
+#include "sdk/fname.hpp"
+#include "sdk/params.hpp"
+#include "sdk/c_canvas.hpp"
+#include "sdk/c_viewport.hpp"
+#include "sdk/c_controller.hpp"
+
+void utils::get_camera() {
 	APlayerController_eventPlayerCalcView_Parms Parms;
 	FName PlayerCalcView = 0x659;
 	auto pFunc = cheat::canvas->viewport->controller->find_function(PlayerCalcView, FNAME_Find);
@@ -22,8 +26,7 @@ bool utils::is_screen_pos(const vec_3d& pos) {
 	return cheat::canvas && cheat::canvas->clip_x > pos.x && pos.x > 0.f && cheat::canvas->clip_y > pos.y && pos.y > 0.f;
 }
 
-std::uint8_t* utils::pattern_scan(void* module, const char* signature)
-{
+std::uint8_t* utils::pattern_scan(void* module, const char* signature) {
 	static auto pattern_to_byte = [](const char* pattern) {
 		auto bytes = std::vector<int>{};
 		auto start = const_cast<char*>(pattern);

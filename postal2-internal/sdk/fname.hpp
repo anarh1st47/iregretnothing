@@ -23,3 +23,12 @@ struct FNameEntry
 		wchar_t	WideName[NAME_SIZE];
 	};
 };
+
+typedef int FName;
+
+enum EFindName
+{
+	FNAME_Find,			// Find a name; return 0 if it doesn't exist.
+	FNAME_Add,			// Find a name or add it if it doesn't exist.
+	FNAME_Intrinsic,	// Find a name or add it intrinsically if it doesn't exist.
+};

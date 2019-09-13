@@ -1,5 +1,4 @@
 #pragma once
-#include "cheat.hpp"
 
 namespace hacks::memhacks {
 	void godmode();

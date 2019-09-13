@@ -1,7 +1,10 @@
 #pragma once
 #include "memhacks.hpp"
-#include "cheat.hpp"
-#include "uobject.hpp"
+#include "../cheat.hpp"
+#include "../sdk/c_pawn.hpp"
+#include "../sdk/c_ammo.hpp"
+#include "../sdk/c_inventory.hpp"
+#include "../sdk/c_weapon.hpp"
 
 void hacks::memhacks::godmode() {
 	if (!cheat::localplayer)
