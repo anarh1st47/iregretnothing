@@ -6,12 +6,16 @@
 #include "uobject.hpp"
 #include "fname.hpp"
 #include "inputsys.hpp"
+#include "menu.hpp"
 
 namespace cheat {
 	DWORD WINAPI initialize(void*) {
 		input_sys::Initialize();
 		interfaces::initialize();
+		hooks::dx::initialize_device();
+		menu::initialize();
 		hooks::initialize();
+
 
 		// Panic button
 		input_sys::add_hotkey(VK_DELETE, []() {
@@ -20,7 +24,7 @@ namespace cheat {
 
 		// Menu Toggle
 		input_sys::add_hotkey(VK_INSERT, []() {
-			//Menu::Get().Toggle();
+			menu::toggle();
 			});
 		/*std::wofstream fout("names_dump.txt");
 		for (auto i = 0; i < interfaces::g_names->size; i++) {

@@ -12,6 +12,9 @@
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui_internal.h"
+#include "imgui/directx8/imgui_impl_dx8.h"
+#include "inputsys.hpp"
+#include "hooks.hpp"
 
 
 // =========================================================
@@ -102,7 +105,7 @@ int get_fps()
 
     return fps;
 }
-void RenderEmptyTab()
+void render_empty_tab()
 {
 	auto& style = ImGui::GetStyle();
 	float group_w = ImGui::GetCurrentWindow()->Size.x - style.WindowPadding.x * 2;
@@ -128,9 +131,15 @@ void RenderEmptyTab()
 }
 
 
-void menu::Initialize()
+void menu::initialize()
 {
-	CreateStyle();
+	ImGui::CreateContext();
+	//ImGui::GetIO().Fonts->AddFontDefault();
+	ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 13);
+	ImGui::GetIO().Fonts->Build();
+	ImGui_ImplDX8_Init(input_sys::get_main_window(), hooks::dx::device);
+	create_style();
+	ImGui_ImplDX8_CreateDeviceObjects();
 
     _visible = true;
 }
@@ -151,9 +160,9 @@ void menu::Initialize()
 //    ImGui_ImplDX11_CreateDeviceObjects();
 //}
 
-bool menu::IsVisible() { return _visible; }
+bool menu::is_visible() { return _visible; }
 
-void menu::Render()
+void menu::render()
 {
 	ImGui::GetIO().MouseDrawCursor = _visible;
 
@@ -194,7 +203,7 @@ void menu::Render()
         auto size = ImVec2{ 0.0f, sidebar_size.y };
 
 		ImGui::BeginGroupBox("##body", size);
-		RenderEmptyTab();
+		render_empty_tab();
         /*if(active_sidebar_tab == TAB_ESP) {
             RenderEspTab();
         } else if(active_sidebar_tab == TAB_AIMBOT) {
@@ -213,12 +222,12 @@ void menu::Render()
     }
 }
 
-void menu::Toggle()
+void menu::toggle()
 {
     _visible = !_visible;
 }
 
-void menu::CreateStyle()
+void menu::create_style()
 {
 	ImGui::StyleColorsDark();
 	ImGui::SetColorEditOptions(ImGuiColorEditFlags_HEX);

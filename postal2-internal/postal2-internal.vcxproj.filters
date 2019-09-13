@@ -108,6 +108,9 @@
     <ClCompile Include="UI.cpp">
       <Filter>Source Files\menu</Filter>
     </ClCompile>
+    <ClCompile Include="imgui\directx8\imgui_impl_dx8.cpp">
+      <Filter>Source Files\menu\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tarray.hpp">
@@ -194,7 +197,7 @@
     <ClInclude Include="ui.hpp">
       <Filter>Header Files\menu</Filter>
     </ClInclude>
-    <ClInclude Include="imgui\directx11\imgui_impl_dx11.h">
+    <ClInclude Include="imgui\directx8\imgui_impl_dx8.h">
       <Filter>Header Files\menu\imgui\impl</Filter>
     </ClInclude>
   </ItemGroup>

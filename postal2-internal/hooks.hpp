@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include <Include/d3d8types.h>
+#include <d3d8types.h>
 
 
 struct c_canvas;
@@ -28,6 +28,8 @@ namespace hooks {
 	int __stdcall reset_h(IDirect3DDevice8* device, D3DPRESENT_PARAMETERS* pPresentationParameters);
 	void destroy();
 	namespace dx {
-		void initialize();
+		inline bool is_resizing = false;
+		inline IDirect3DDevice8* device = nullptr;
+		void initialize_device();
 	}
 };

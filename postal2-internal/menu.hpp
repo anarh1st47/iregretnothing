@@ -6,19 +6,19 @@
 struct IDirect3DDevice9;
 
 namespace menu {
-    void Initialize();
+    void initialize();
     void Shutdown();
 
     void OnDeviceLost();
     void OnDeviceReset();
 
-    void Render();
+    void render();
 
-    void Toggle();
+    void toggle();
 
-	bool IsVisible();
+	bool is_visible();
 
-    void CreateStyle();
+    void create_style();
 
     inline ImGuiStyle        _style;
 	inline bool              _visible;

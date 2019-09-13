@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <vector>
 
+struct vec_3d;
 
 namespace utils {
 	/*
@@ -16,4 +17,5 @@ namespace utils {
 	 */
 	std::uint8_t* pattern_scan(void* module, const char* signature);
 	void get_camera();
+	bool is_screen_pos(const vec_3d& pos);
 }

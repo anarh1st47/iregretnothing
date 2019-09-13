@@ -1,6 +1,7 @@
 #include "utils.hpp"
 #include "uobject.hpp"
 #include "cheat.hpp"
+#include "math.hpp"
 
 void utils::get_camera()
 {
@@ -15,6 +16,10 @@ void utils::get_camera()
 		cheat::camera::rot = Parms.CameraRotation;
 		//ViewActor = Parms.ViewActor;
 	}
+}
+
+bool utils::is_screen_pos(const vec_3d& pos) {
+	return cheat::canvas && cheat::canvas->clip_x > pos.x && pos.x > 0.f && cheat::canvas->clip_y > pos.y && pos.y > 0.f;
 }
 
 std::uint8_t* utils::pattern_scan(void* module, const char* signature)
