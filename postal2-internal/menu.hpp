@@ -8,8 +8,8 @@ namespace menu {
     void initialize();
     void Shutdown();
 
-    void OnDeviceLost();
-    void OnDeviceReset();
+    void on_device_lost();
+    void on_device_reset();
 
     void render();
 

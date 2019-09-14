@@ -118,8 +118,8 @@ int __stdcall hooks::reset_h(IDirect3DDevice8* device, D3DPRESENT_PARAMETERS* pP
 
 	auto hr = ofunc(device, pPresentationParameters);
 
-
-	ImGui_ImplDX8_CreateDeviceObjects();
+	menu::on_device_lost();
+	menu::on_device_reset();
 
 	dx::is_resizing = false;
 	return hr;

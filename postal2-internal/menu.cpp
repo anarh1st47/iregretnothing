@@ -144,21 +144,21 @@ void menu::initialize()
     _visible = true;
 }
 
-//void menu::Shutdown()
-//{
-//	ImGui_ImplDX11_Shutdown();
-//	ImGui::DestroyContext();
-//}
-//
-//void menu::OnDeviceLost()
-//{
-//    ImGui_ImplDX11_InvalidateDeviceObjects();
-//}
-//
-//void menu::OnDeviceReset()
-//{
-//    ImGui_ImplDX11_CreateDeviceObjects();
-//}
+void menu::Shutdown()
+{
+	ImGui_ImplDX8_Shutdown();
+	ImGui::DestroyContext();
+}
+
+void menu::on_device_lost()
+{
+    ImGui_ImplDX8_InvalidateDeviceObjects();
+}
+
+void menu::on_device_reset()
+{
+    ImGui_ImplDX8_CreateDeviceObjects();
+}
 
 bool menu::is_visible() { return _visible; }
 

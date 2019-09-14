@@ -6,10 +6,10 @@
 #include <thread>
 #include <stdexcept>
 
-//#include "menu.hpp"
+#include "menu.hpp"
 
 //#include "binds.hpp"
-//#include "imgui/directx11/imgui_impl_dx11.h"
+#include "imgui/directx8/imgui_impl_dx8.h"
 
 //extern IMGUI_API LRESULT   ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -58,8 +58,8 @@ LRESULT __stdcall input_sys::wnd_proc_h(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 	//ImGuiIO& io = ImGui::GetIO();
 	process_message(msg, wParam, lParam);
 
-	//if (Menu::Get().IsVisible())
-	//	return ImGui_ImplDX9_WndProcHandler(hWnd, msg, wParam, lParam);
+	if (menu::is_visible())
+		return ImGui_ImplDX8_WndProcHandler(hWnd, msg, wParam, lParam);
 
 
 	return CallWindowProcW((WNDPROC)m_ulOldWndProc, hWnd, msg, wParam, lParam);
