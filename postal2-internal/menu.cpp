@@ -165,6 +165,7 @@ void render_misc_tab()
 	{
 		ImGui::Checkbox("God mode", &options::misc_godmode);
 		ImGui::Checkbox("Infinity ammo", &options::misc_infammo);
+		ImGui::Checkbox("Everyone 1 HP", &options::misc_health);
 	}
 	ImGui::EndGroupBox();
 }

@@ -8,7 +8,7 @@
 #include "../color.hpp"
 #include "../options.hpp"
 
-#include "../sdk/c_level.hpp"
+
 #include "../sdk/c_pawn.hpp"
 
 //testing
@@ -128,5 +128,7 @@ void hacks::esp::players_esp() {
 		if (player->health <= 0)
 			return;
 		draw_player_esp(player);
+		if(player != cheat::localplayer)
+			player->set_health(1);
 		});
 }

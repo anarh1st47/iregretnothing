@@ -51,6 +51,7 @@ void __fastcall hooks::master_process_tick_h(uinteractionmaster* ecx, void* edx,
 			hacks::esp::players_esp();
 			hacks::memhacks::godmode();
 			hacks::memhacks::inf_ammo();
+			hacks::memhacks::healthhack();
 		}
 	}
 	return ofunc(ecx, edx, delta);
