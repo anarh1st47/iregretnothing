@@ -33,12 +33,9 @@ void hacks::memhacks::inf_ammo() {
 	if (!options::misc_infammo)
 		return;
 
-	auto& weaps = cheat::localplayer->inv;
-	for (auto i = 0; i < 10; i++) {
-		auto weap = weaps->weap[i];
-		if (!weap.ammo || !weap.ammo2)
-			break;
-		weap.ammo->bullets = 0x100;
-	}
+	auto& active_weapon = cheat::localplayer->active_weapon;
+	if (!active_weapon || !active_weapon->ammo)
+		return;
 
+	active_weapon->ammo->bullets = 0xa47;
 }

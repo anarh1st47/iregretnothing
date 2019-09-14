@@ -3,6 +3,7 @@
 #include "../math.hpp"
 
 struct c_inventory;
+struct c_weapon;
 
 struct c_pawn
 {//300 3ac
@@ -19,7 +20,9 @@ struct c_pawn
 	c_pawn* next; // 268 next
 	char pad_2222[0x94];
 	wchar_t* name; //0x0300
-	char pad_0304[16]; //0x0304
+	char pad_0304[8]; //0x0304
+	c_weapon* active_weapon; //30c
+	char pad_0310[4]; //0x0310
 	class N00001192* inventory; //0x0314
 	char pad_0318[40]; //0x0318
 	int32_t health; //0x0340
