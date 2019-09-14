@@ -71,6 +71,13 @@ BOOL WINAPI hooks::set_cursor_h(int x, int y) {
 	return ofunc(x, y);
 }
 
+int __fastcall uengine_key_h(void* ecx, void* edx, int a1, int a2, int a3) {
+	static auto ofunc = hooks::h.original(uengine_key_h);
+	if (menu::is_visible())
+		return 0;
+	return ofunc(ecx, edx, a1, a2, a3);
+}
+
 void hooks::initialize() {
 	auto master_process_tick_addr = GetProcAddress(cheat::engine_handle, "?MasterProcessTick@UInteractionMaster@@QAEXM@Z");
 	h.create_hook(master_process_tick_h, master_process_tick_addr);
@@ -78,15 +85,18 @@ void hooks::initialize() {
 	auto master_process_pre_render_addr = GetProcAddress(cheat::engine_handle, "?MasterProcessPreRender@UInteractionMaster@@QAEXPAVUCanvas@@@Z");
 	h.create_hook(master_process_pre_render_h, master_process_pre_render_addr);
 
+	auto uengine_key_addr = GetProcAddress(cheat::engine_handle, "?Key@UEngine@@UAEHPAVUViewport@@W4EInputKey@@_W@Z");
+	h.create_hook(uengine_key_h, uengine_key_addr);
+
 	h.create_hook(set_cursor_h, SetCursorPos);
 
 	//dx
 	auto vtable = *(void**)interfaces::dx_device;
 	auto present_addr = (void*)(((int*)vtable)[15]);
-	hooks::h.create_hook(hooks::present_h, present_addr);
+	h.create_hook(hooks::present_h, present_addr);
 
 	auto reset_addr = (void*)(((int*)vtable)[14]);
-	hooks::h.create_hook(hooks::reset_h, reset_addr);
+	h.create_hook(hooks::reset_h, reset_addr);
 
 	h.enable();
 };

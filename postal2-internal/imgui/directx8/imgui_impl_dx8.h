@@ -18,6 +18,7 @@ void ImGui_ImplDX8_UpdateDevice(IDirect3DDevice8* device);
 IMGUI_API bool        ImGui_ImplDX8_Init(void* hwnd, IDirect3DDevice8* device);
 IMGUI_API void        ImGui_ImplDX8_Shutdown();
 void THRotatorImGui_UpdateAndApplyFixedStates();
+static bool ImGui_ImplWin32_UpdateMouseCursor();
 IMGUI_API void        ImGui_ImplDX8_NewFrame();
 
 // Use if you want to reset your rendering device without losing ImGui state.

@@ -306,29 +306,42 @@ void THRotatorImGui_RenderDrawLists(ImDrawData* drawData)
 }
 
 
-IMGUI_API LRESULT ImGui_ImplDX8_WndProcHandler(HWND, UINT msg, WPARAM wParam, LPARAM lParam)
+
+LRESULT ImGui_ImplDX8_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	ImGuiIO& io = ImGui::GetIO();
 	switch (msg)
 	{
-	case WM_LBUTTONDOWN:
-		io.MouseDown[0] = true;
+	case WM_LBUTTONDOWN: case WM_LBUTTONDBLCLK:
+	case WM_RBUTTONDOWN: case WM_RBUTTONDBLCLK:
+	case WM_MBUTTONDOWN: case WM_MBUTTONDBLCLK:
+	case WM_XBUTTONDOWN: case WM_XBUTTONDBLCLK:
+	{
+		int button = 0;
+		if (msg == WM_LBUTTONDOWN || msg == WM_LBUTTONDBLCLK) button = 0;
+		if (msg == WM_RBUTTONDOWN || msg == WM_RBUTTONDBLCLK) button = 1;
+		if (msg == WM_MBUTTONDOWN || msg == WM_MBUTTONDBLCLK) button = 2;
+		if (msg == WM_XBUTTONDOWN || msg == WM_XBUTTONDBLCLK) button = (HIWORD(wParam) == XBUTTON1) ? 3 : 4;
+		if (!ImGui::IsAnyMouseDown() && GetCapture() == nullptr)
+			SetCapture(hwnd);
+		io.MouseDown[button] = true;
 		return true;
+	}
 	case WM_LBUTTONUP:
-		io.MouseDown[0] = false;
-		return true;
-	case WM_RBUTTONDOWN:
-		io.MouseDown[1] = true;
-		return true;
 	case WM_RBUTTONUP:
-		io.MouseDown[1] = false;
-		return true;
-	case WM_MBUTTONDOWN:
-		io.MouseDown[2] = true;
-		return true;
 	case WM_MBUTTONUP:
-		io.MouseDown[2] = false;
+	case WM_XBUTTONUP:
+	{
+		int button = 0;
+		if (msg == WM_LBUTTONUP) button = 0;
+		if (msg == WM_RBUTTONUP) button = 1;
+		if (msg == WM_MBUTTONUP) button = 2;
+		if (msg == WM_XBUTTONUP) button = (HIWORD(wParam) == XBUTTON1) ? 3 : 4;
+		io.MouseDown[button] = false;
+		if (!ImGui::IsAnyMouseDown() && GetCapture() == hwnd)
+			ReleaseCapture();
 		return true;
+	}
 	case WM_MOUSEWHEEL:
 		io.MouseWheel += GET_WHEEL_DELTA_WPARAM(wParam) > 0 ? +1.0f : -1.0f;
 		return true;
@@ -337,20 +350,26 @@ IMGUI_API LRESULT ImGui_ImplDX8_WndProcHandler(HWND, UINT msg, WPARAM wParam, LP
 		io.MousePos.y = (signed short)(lParam >> 16);
 		return true;
 	case WM_KEYDOWN:
+	case WM_SYSKEYDOWN:
 		if (wParam < 256)
-			io.KeysDown[wParam] = 1;
+			io.KeysDown[wParam] = true;
 		return true;
 	case WM_KEYUP:
+	case WM_SYSKEYUP:
 		if (wParam < 256)
-			io.KeysDown[wParam] = 0;
+			io.KeysDown[wParam] = false;
 		return true;
 	case WM_CHAR:
 		// You can also use ToAscii()+GetKeyboardState() to retrieve characters.
 		if (wParam > 0 && wParam < 0x10000)
 			io.AddInputCharacter((unsigned short)wParam);
 		return true;
+	case WM_SETCURSOR:
+		if (LOWORD(lParam) == HTCLIENT && ImGui_ImplWin32_UpdateMouseCursor())
+			return 1;
 	}
-	return 0;
+
+	return 1;
 }
 
 void ImGui_ImplDX8_UpdateDevice(IDirect3DDevice8* device) {
