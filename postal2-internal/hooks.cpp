@@ -3,16 +3,7 @@
 #include "hooks.hpp"
 #include "cheat.hpp"
 #include "interfaces.hpp"
-#include "math.hpp"
 #include "utils.hpp"
-#include "color.hpp"
-#include "inputsys.hpp"
-
-#include <d3dcompiler.h>
-#include <dxgi.h>
-#include <D3D8Types.h>
-#include <d3d8.h>
-#include <d3dx8.h>
 #include "menu.hpp"
 #include "imgui/directx8/imgui_impl_dx8.h"
 
