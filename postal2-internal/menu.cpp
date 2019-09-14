@@ -221,8 +221,8 @@ void menu::render()
 	if (ImGui::Begin("I Reget Nothing",
 		&_visible,
 		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_NoResize |
-		ImGuiWindowFlags_NoTitleBar)) {
+		ImGuiWindowFlags_NoResize 
+	)) {
 
 		//auto& style = ImGui::GetStyle();
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0,0));

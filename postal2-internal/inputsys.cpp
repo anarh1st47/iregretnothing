@@ -26,8 +26,10 @@ HWND input_sys::get_main_window() { return m_hTargetWindow; }
 void input_sys::set_main_window()
 {
 	// Get window handle
-	while (!(m_hTargetWindow = FindWindowA("Postal2UnrealWWindowsViewportWindow", nullptr)))
-	{
+	while (!m_hTargetWindow) {
+		m_hTargetWindow = FindWindowA("Postal2UnrealWWindowsViewportWindow", nullptr);
+		if(!m_hTargetWindow)
+			m_hTargetWindow = FindWindowA("ParadiseLostUnrealWWindowsViewportWindow", nullptr);
 		using namespace std::literals::chrono_literals;
 		std::this_thread::sleep_for(50ms);
 	}
