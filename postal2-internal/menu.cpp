@@ -15,6 +15,7 @@
 #include "imgui/directx8/imgui_impl_dx8.h"
 #include "inputsys.hpp"
 #include "interfaces.hpp"
+#include "options.hpp"
 
 
 // =========================================================
@@ -25,8 +26,7 @@
 static const char* sidebar_tabs[] = {
     "ESP",
     "AIM",
-    "MISC",
-    "CONFIG"
+    "MISC"
 };
 
 constexpr static float get_sidebar_item_width() { return 150.0f; }
@@ -36,7 +36,6 @@ enum {
 	TAB_ESP,
 	TAB_AIMBOT,
 	TAB_MISC,
-	TAB_CONFIG
 };
 
 namespace ImGuiEx
@@ -113,7 +112,7 @@ void render_empty_tab()
 	bool placeholder_true = true;
 
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
-	ImGui::ToggleButton("AIM", &placeholder_true, ImVec2{ group_w, 25.0f });
+	ImGui::ToggleButton("empty", &placeholder_true, ImVec2{ group_w, 25.0f });
 	ImGui::PopStyleVar();
 
 	ImGui::BeginGroupBox("##body_content");
@@ -126,6 +125,46 @@ void render_empty_tab()
 		 pos = pos + wsize / 2.0f;
 
 		 ImGui::RenderText(pos - ImGui::CalcTextSize(message) / 2.0f, message);
+	}
+	ImGui::EndGroupBox();
+}
+
+void render_esp_tab()
+{
+	auto& style = ImGui::GetStyle();
+	float group_w = ImGui::GetCurrentWindow()->Size.x - style.WindowPadding.x * 2;
+
+	bool placeholder_true = true;
+
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+	ImGui::ToggleButton("ESP", &placeholder_true, ImVec2{ group_w, 25.0f });
+	ImGui::PopStyleVar();
+
+	ImGui::BeginGroupBox("##body_content");
+	{
+		ImGui::Text("Player / Dog ESP");
+		ImGui::Checkbox("Box", &options::esp_player_box);
+		ImGui::Checkbox("Name", &options::esp_player_name);
+		ImGui::Checkbox("Health", &options::esp_player_health);
+	}
+	ImGui::EndGroupBox();
+}
+
+void render_misc_tab()
+{
+	auto& style = ImGui::GetStyle();
+	float group_w = ImGui::GetCurrentWindow()->Size.x - style.WindowPadding.x * 2;
+
+	bool placeholder_true = true;
+
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+	ImGui::ToggleButton("MISC", &placeholder_true, ImVec2{ group_w, 25.0f });
+	ImGui::PopStyleVar();
+
+	ImGui::BeginGroupBox("##body_content");
+	{
+		ImGui::Checkbox("God mode", &options::misc_godmode);
+		ImGui::Checkbox("Infinity ammo", &options::misc_infammo);
 	}
 	ImGui::EndGroupBox();
 }
@@ -203,16 +242,13 @@ void menu::render()
         auto size = ImVec2{ 0.0f, sidebar_size.y };
 
 		ImGui::BeginGroupBox("##body", size);
-		render_empty_tab();
-        /*if(active_sidebar_tab == TAB_ESP) {
-            RenderEspTab();
+        if(active_sidebar_tab == TAB_ESP) {
+            render_esp_tab();
         } else if(active_sidebar_tab == TAB_AIMBOT) {
-            RenderEmptyTab();
+			render_empty_tab();
         } else if(active_sidebar_tab == TAB_MISC) {
-            RenderMiscTab();
-        } else if(active_sidebar_tab == TAB_CONFIG) {
-            RenderConfigTab();
-        }*/
+            render_misc_tab();
+        }
         ImGui::EndGroupBox();
 
         ImGui::TextColored(ImVec4{ 0.0f, 0.5f, 0.0f, 1.0f }, "FPS: %03d", get_fps());

@@ -10,8 +10,9 @@ struct c_pawn
 	vec_3d pos; //0x00E8
 	char pad_00F4[52]; //0x00F4
 	vec_3d pos2; //0x0128
-	char pad_0134[160]; //0x0134
-	float height; //0x01D4
+	char pad_0134[160 - 0x10 + 4]; //0x0134
+	float height; //0x01c8
+	char _pad[0x10 - 4];
 	char pad_01D8[52]; //0x01D8
 	vec_3d pos3; //0x020C
 	char pad_0218[0x50]; //0x0218 

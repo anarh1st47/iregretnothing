@@ -1,10 +1,12 @@
 #include <d3dx8.h>
+#include <string>
 
 #include "esp.hpp"
 #include "../cheat.hpp"
 #include "../interfaces.hpp"
 #include "../utils.hpp"
 #include "../color.hpp"
+#include "../options.hpp"
 
 #include "../sdk/c_level.hpp"
 #include "../sdk/c_pawn.hpp"
@@ -80,8 +82,7 @@ namespace hacks {
 	void draw_player_esp(c_pawn* player);
 }
 
-void hacks::draw_player_esp(c_pawn* player)
-{
+void hacks::draw_player_esp(c_pawn* player) {
 	float width, left, right, top, bot;
 	auto color = c_color(0xffffffff);
 	auto pos_top = player->pos;
@@ -107,11 +108,22 @@ void hacks::draw_player_esp(c_pawn* player)
 	top = pos_top_2d.y;
 	bot = pos_bot_2d.y;
 
-	testing::draw_box(left, top, right, bot, color);
-	testing::draw_text(player->name2, left, bot);
+	if(options::esp_player_box)
+		testing::draw_box(left, top, right, bot, color);
+	if (options::esp_player_name)
+		testing::draw_text(player->name2, left, bot);
+	if (options::esp_player_health) {
+		testing::draw_text((std::to_wstring(player->health) + L" HP").c_str(), left, top);
+		//i thought about health bar but there is no max health defined :lillulmoa:
+		//testing::draw_box(right - 5, top, right, bot, color);
+		//testing::draw_box(right - 5, top, right, bot, color);
+	}
 }
 
 void hacks::esp::players_esp() {
+	if (!options::esp_player_box && !options::esp_player_name && !options::esp_player_health)
+		return;
+
 	cheat::level->for_each_player([&](c_pawn* player) -> void {
 		if (player->health <= 0)
 			return;

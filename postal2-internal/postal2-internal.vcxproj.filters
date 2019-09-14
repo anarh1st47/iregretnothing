@@ -242,5 +242,8 @@
     <ClInclude Include="hacks\esp.hpp">
       <Filter>Header Files\hacks</Filter>
     </ClInclude>
+    <ClInclude Include="options.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

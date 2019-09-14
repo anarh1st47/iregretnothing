@@ -221,6 +221,7 @@
     <ClInclude Include="interfaces.hpp" />
     <ClInclude Include="math.hpp" />
     <ClInclude Include="menu.hpp" />
+    <ClInclude Include="options.hpp" />
     <ClInclude Include="sdk\c_actor.hpp" />
     <ClInclude Include="sdk\c_ammo.hpp" />
     <ClInclude Include="sdk\c_canvas.hpp" />
