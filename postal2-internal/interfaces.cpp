@@ -19,7 +19,7 @@ void interfaces::directx() {
 		return;
 	}
 
-	auto mod = GetModuleHandleA("d3d8.dll");
+	auto mod = LoadLibraryA("d3d8.dll");
 	if (!mod) {
 		return;
 	}

@@ -1,9 +1,10 @@
 #pragma once
 #include "../math.hpp"
 
-struct APlayerController_eventPlayerCalcView_Parms
-{
-	struct AActor* ViewActor;
+struct AActor;
+
+struct APlayerController_eventPlayerCalcView_Parms {
+	AActor* ViewActor;
 	vec_3d CameraLocation;
 	vec_3d_int CameraRotation;
 };

@@ -10,11 +10,12 @@ struct c_level;
 namespace cheat {
 	DWORD WINAPI initialize(void*);
 	void unload();
+
 	inline c_canvas* canvas = nullptr;
 	inline c_level* level = nullptr;
-	inline HMODULE core_handle;
-	inline HMODULE engine_handle;
-	inline c_pawn* localplayer;
+	inline c_pawn* localplayer = nullptr;
+	inline HMODULE core_handle = nullptr;
+	inline HMODULE engine_handle = nullptr;
 
 	namespace camera {
 		inline vec_3d pos;

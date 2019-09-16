@@ -6,12 +6,18 @@ using FName = int;
 
 struct c_canvas //: public UObject
 {
+private:
 	char pad_0000[40]; //0x0000
+public:
 	c_font* font; //0x0028
+private:
 	char pad_002C[24]; //0x002C
+public:
 	float clip_x; // 44h
 	float clip_y; // 48h
+private:
 	char _pad2[0x24];
+public:
 	c_font* font1;
 	c_font* font2;
 	c_font* font3;

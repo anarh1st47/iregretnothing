@@ -128,7 +128,5 @@ void hacks::esp::players_esp() {
 		if (player->health <= 0)
 			return;
 		draw_player_esp(player);
-		if(player != cheat::localplayer)
-			player->set_health(1);
 		});
 }

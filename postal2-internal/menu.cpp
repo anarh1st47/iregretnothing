@@ -3,11 +3,7 @@
 #include <Windows.h>
 #include <chrono>
 
-//#include "valve_sdk/csgostructs.hpp"
-//#include "helpers/input.hpp"
-//#include "options.hpp"
 #include "ui.hpp"
-//#include "config.hpp"
 #include "color.hpp"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -62,8 +58,7 @@ namespace ImGuiEx
 }
 
 template<size_t N>
-void render_tabs(const char* (&names)[N], int& activetab, float w, float h, bool sameline)
-{
+void render_tabs(const char* (&names)[N], int& activetab, float w, float h, bool sameline) {
     bool values[N] = { false };
 
     values[activetab] = true;
@@ -77,8 +72,7 @@ void render_tabs(const char* (&names)[N], int& activetab, float w, float h, bool
     }
 }
 
-ImVec2 get_sidebar_size()
-{
+ImVec2 get_sidebar_size() {
     constexpr float padding = 10.0f;
     constexpr auto size_w = padding * 2.0f + get_sidebar_item_width();
     constexpr auto size_h = padding * 2.0f + (sizeof(sidebar_tabs) / sizeof(char*)) * get_sidebar_item_height();
@@ -86,8 +80,7 @@ ImVec2 get_sidebar_size()
     return ImVec2{ size_w, ImMax(325.0f, size_h) };
 }
 
-int get_fps()
-{
+int get_fps() {
     using namespace std::chrono;
     static int count = 0;
     static auto last = high_resolution_clock::now();
@@ -104,8 +97,7 @@ int get_fps()
 
     return fps;
 }
-void render_empty_tab()
-{
+void render_empty_tab() {
 	auto& style = ImGui::GetStyle();
 	float group_w = ImGui::GetCurrentWindow()->Size.x - style.WindowPadding.x * 2;
 
@@ -129,8 +121,7 @@ void render_empty_tab()
 	ImGui::EndGroupBox();
 }
 
-void render_esp_tab()
-{
+void render_esp_tab() {
 	auto& style = ImGui::GetStyle();
 	float group_w = ImGui::GetCurrentWindow()->Size.x - style.WindowPadding.x * 2;
 
@@ -150,8 +141,7 @@ void render_esp_tab()
 	ImGui::EndGroupBox();
 }
 
-void render_misc_tab()
-{
+void render_misc_tab() {
 	auto& style = ImGui::GetStyle();
 	float group_w = ImGui::GetCurrentWindow()->Size.x - style.WindowPadding.x * 2;
 
@@ -171,8 +161,7 @@ void render_misc_tab()
 }
 
 
-void menu::initialize()
-{
+void menu::initialize() {
 	ImGui::CreateContext();
 	//ImGui::GetIO().Fonts->AddFontDefault();
 	ImGui::GetIO().Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 13);
@@ -184,26 +173,22 @@ void menu::initialize()
     _visible = true;
 }
 
-void menu::Shutdown()
-{
+void menu::shutdown() {
 	ImGui_ImplDX8_Shutdown();
 	ImGui::DestroyContext();
 }
 
-void menu::on_device_lost()
-{
+void menu::on_device_lost() {
     ImGui_ImplDX8_InvalidateDeviceObjects();
 }
 
-void menu::on_device_reset()
-{
+void menu::on_device_reset() {
     ImGui_ImplDX8_CreateDeviceObjects();
 }
 
 bool menu::is_visible() { return _visible; }
 
-void menu::render()
-{
+void menu::render() {
 	ImGui::GetIO().MouseDrawCursor = _visible;
 
     if(!_visible)
@@ -259,13 +244,11 @@ void menu::render()
     }
 }
 
-void menu::toggle()
-{
+void menu::toggle() {
     _visible = !_visible;
 }
 
-void menu::create_style()
-{
+void menu::create_style() {
 	ImGui::StyleColorsDark();
 	ImGui::SetColorEditOptions(ImGuiColorEditFlags_HEX);
 	_style.FrameRounding = 0.f;

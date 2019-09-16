@@ -6,7 +6,7 @@ struct IDirect3DDevice9;
 
 namespace menu {
     void initialize();
-    void Shutdown();
+    void shutdown();
 
     void on_device_lost();
     void on_device_reset();
