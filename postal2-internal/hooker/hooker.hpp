@@ -49,12 +49,12 @@ namespace hooks {
 		}
 
 		void enable() {
-			for (auto h : m_hooks)
+			for (auto& h : m_hooks)
 				h.enable();
 		}
 
 		void restore() {
-			for (auto h : m_hooks)
+			for (auto& h : m_hooks)
 				h.disable();
 		}
 
